@@ -1,0 +1,19 @@
+{
+  "name": "lambda-hono",
+  "scripts": {
+    "start": "sls offline"
+  },
+  "dependencies": {
+    "hono": "^3.12.8"
+  },
+  "devDependencies": {
+    "@serverless/typescript": "^3.38.0",
+    "@types/node": "^20.11.10",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.20.0",
+    "serverless": "^3.38.0",
+    "serverless-esbuild": "^1.50.2",
+    "serverless-offline": "^13.3.3",
+    "ts-node": "^10.9.2"
+  }
+}
