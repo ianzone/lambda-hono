@@ -1,22 +1,22 @@
 {
-	"name": "lambda-hono",
-	"scripts": {
-		"start": "sls offline",
-		"postinstall": "lefthook install"
-	},
-	"dependencies": {
-		"hono": "^3.12.8"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.5.3",
-		"@serverless/typescript": "^3.38.0",
-		"@types/node": "^20.11.10",
-		"cross-env": "^7.0.3",
-		"esbuild": "^0.20.0",
-		"lefthook": "^1.6.1",
-		"serverless": "^3.38.0",
-		"serverless-esbuild": "^1.50.2",
-		"serverless-offline": "^13.3.3",
-		"ts-node": "^10.9.2"
-	}
+  "name": "lambda-hono",
+  "scripts": {
+    "start": "sls offline",
+    "postinstall": "lefthook install"
+  },
+  "dependencies": {
+    "hono": "^3.12.10"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
+    "@serverless/typescript": "^3.38.0",
+    "@types/node": "^20.11.16",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.20.0",
+    "lefthook": "^1.6.1",
+    "serverless": "^3.38.0",
+    "serverless-esbuild": "^1.51.0",
+    "serverless-offline": "^13.3.3",
+    "ts-node": "^10.9.2"
+  }
 }
