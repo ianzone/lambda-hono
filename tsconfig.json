@@ -1,0 +1,11 @@
+{
+  // https://www.typescriptlang.org/tsconfig
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "compilerOptions": {
+    // Modules
+    "baseUrl": ".",
+    // Output
+    "outDir": "dist",
+    "incremental": true,
+  }
+}

@@ -1,8 +1,8 @@
 import type { AWS } from '@serverless/typescript';
 
 const serverlessConfiguration: AWS = {
-  app: 'app-name',
-  service: 'lambda-name',
+  app: 'app',
+  service: '${self:app}-api',
 
   frameworkVersion: '3',
   configValidationMode: 'error',
@@ -11,17 +11,39 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs20.x',
     architecture: 'arm64',
+    memorySize: 512,
     timeout: 29, // the maximum api gateway timeout is 29s
     tags: {
-      developer: 'devName',
+      developer: 'ian',
       project: '${self:app}',
       service: '${self:service}',
     },
     logRetentionInDays: 60,
     environment: {
       STAGE: '${sls:stage}',
-      STAGE_PATH_PREFIX: '/${sls:stage}',
       NODE_OPTIONS: '--enable-source-maps',
+    },
+    iam: {
+      role: {
+        statements: [],
+      },
+    },
+    httpApi: {
+      cors: true,
+    },
+  },
+
+  functions: {
+    api: {
+      handler: 'src/lambda.handler',
+      // url: {
+      //   cors: { allowCredentials: true },
+      // },
+      events: [
+        {
+          httpApi: '*',
+        },
+      ],
     },
   },
 
@@ -29,30 +51,27 @@ const serverlessConfiguration: AWS = {
     individually: true,
   },
 
-  functions: {
-    api: {
-      handler: 'src/lambda.handler',
-      events: [
-        {
-          http: {
-            method: 'ANY',
-            path: '/',
-            cors: true,
-          },
-        },
-        {
-          http: {
-            method: 'ANY',
-            path: '{proxy+}',
-            cors: true, // https://www.serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors
-          },
-        },
-      ],
-    },
-  },
-
   // https://github.com/floydspace/serverless-esbuild
   plugins: ['serverless-esbuild', 'serverless-offline'],
+
+  custom: {
+    esbuild: {
+      minify: true,
+      sourcemap: true,
+      packager: 'pnpm',
+      exclude: [],
+    },
+  },
 };
+
+const functions = serverlessConfiguration.functions;
+for (const name in functions) {
+  if (Object.prototype.hasOwnProperty.call(functions, name)) {
+    const fn = functions[name];
+    if (fn.name === undefined) {
+      fn.name = `\${self:app}-\${sls:stage}-${name}`;
+    }
+  }
+}
 
 module.exports = serverlessConfiguration;

@@ -1,22 +1,29 @@
 {
   "name": "lambda-hono",
   "scripts": {
-    "start": "sls offline",
-    "postinstall": "lefthook install"
+    "dev": "sls offline",
+    "deploy": "sls deploy --aws-s3-accelerate",
+    "lint": "biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true src",
+    "postinstall": "lefthook install",
+    "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "hono": "^3.12.10"
+    "hono": "^3.12.12"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
     "@serverless/typescript": "^3.38.0",
-    "@types/node": "^20.11.16",
+    "@tsconfig/node-lts": "^20.1.1",
+    "@types/aws-lambda": "^8.10.134",
+    "@types/node": "^20.11.20",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.20.0",
+    "esbuild": "^0.20.1",
+    "git-cz": "^4.9.0",
     "lefthook": "^1.6.1",
     "serverless": "^3.38.0",
     "serverless-esbuild": "^1.51.0",
     "serverless-offline": "^13.3.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   }
 }

@@ -14,5 +14,9 @@
 #
 pre-commit:
   commands:
-    lint-format:
+    typescript:
+      priority: 1
+      run: pnpm tsc --noEmit
+    biome:
+      priority: 2
       run: pnpm biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
